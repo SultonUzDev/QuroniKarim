@@ -2,7 +2,15 @@ package com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
+val ColorPrimaryDark = Color(0xFF377D71)
+val ColorPrimaryLight = Color(0xFF7D9D9C)
+val ColorPrimaryVariant = Color(0xFF18978F)
 val Teal200 = Color(0xFF03DAC5)
+
+
+val Color1 =Color(0xFFD8CCA3)
+val Color2=Color(0xFFCEC68F)
+val Color3 =Color(0xFFE9CB8E)
+val ColorTextHeader =Color(0xFF354259)
+val ColorText =Color(0xFF1B2430)
+val ColorSurah =Color(0xFF2C3639)

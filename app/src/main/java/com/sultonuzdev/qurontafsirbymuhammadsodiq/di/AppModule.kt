@@ -20,8 +20,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideSurahDatabase(@ApplicationContext context: Context): SurahDatabase =
-        Room.databaseBuilder(context, SurahDatabase::class.java, "surahs.db")
-            .createFromAsset("quran_db.db")
+        Room.databaseBuilder(context, SurahDatabase::class.java, "quran.db")
+            .createFromAsset("quran.db")
             .allowMainThreadQueries()
             .build()
 
@@ -30,6 +30,9 @@ object AppModule {
     @Singleton
     fun provideRepository(database: SurahDatabase): SurahRepository =
         SurahRepositoryImpl(database.surahDao)
+
+
+
 
 
 }

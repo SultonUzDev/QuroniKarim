@@ -1,6 +1,6 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.data.repository
 
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.db.Surah
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah.Surah
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.db.SurahDao
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.repository.SurahRepository
 import kotlinx.coroutines.flow.Flow

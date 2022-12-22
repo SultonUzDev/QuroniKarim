@@ -1,10 +1,10 @@
-package com.sultonuzdev.qurontafsirbymuhammadsodiq.data.db
+package com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "surahs")
+@Entity(tableName = "suralar")
 data class Surah(
     @PrimaryKey()
     @ColumnInfo(name = "_id") var id: Int,

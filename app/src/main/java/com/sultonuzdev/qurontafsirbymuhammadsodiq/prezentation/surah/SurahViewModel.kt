@@ -1,13 +1,12 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.api.SurahDetailsApi
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.repository.SurahDetailsRepository
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.repository.SurahRepository
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -22,26 +21,24 @@ class SurahViewModel
 
     val allSurah = surahRepository.getAllSurah()
 
-    private val _state = mutableStateOf(SurahDetailsState())
-    val state: State<SurahDetailsState> = _state
+    var state by mutableStateOf(SurahDetailsState())
 
-    init {
-        getSurahDetailsById("1")
-    }
 
-    fun getSurahDetailsById(id: String): State<SurahDetailsState> {
+
+     fun getSurahDetailsById(id: String) {
         viewModelScope.launch {
-            _state.value = state.value.copy(surahDetails = null, isLoading = true, error = null)
-            _state.value = state.value.copy(
-                surahDetails = surahDetailsRepository.getSurahDetailById(id),
-                isLoading = false,
-                error = null
-            )
-
+            state = state.copy(surahDetails = null, isLoading = true, error = null)
+            state = when (val result = surahDetailsRepository.getSurahDetailById(id)) {
+                is Resource.Success -> {
+                    state.copy(surahDetails = result.data, isLoading = false, error = null)
+                }
+                is Resource.Error -> {
+                    state.copy(surahDetails = null, isLoading = false, error = result.message)
+                }
+            }
 
         }
 
-        return state
     }
 
 }

@@ -1,10 +1,17 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah_details
 
+import com.google.gson.annotations.SerializedName
+
 data class Aya(
-    val arabic_text: String,
-    val aya: String,
-    val footnotes: String,
-    val id: String,
-    val sura: String,
-    val translation: String
+
+    @SerializedName("aya")
+    val aya: String? =null,
+    @SerializedName("footnotes")
+    val footnotes: String? =null,
+    @SerializedName("id")
+    val id: String? =null,
+    @SerializedName("sura")
+    val sura: String? =null,
+    @SerializedName("translation")
+    val translation: String? =null
 )

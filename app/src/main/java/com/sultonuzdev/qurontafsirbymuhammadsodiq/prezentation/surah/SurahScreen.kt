@@ -34,13 +34,11 @@ import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah.Surah
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.*
 
 @Composable
-
 fun SurahScreen(
     navHostController: NavHostController,
     surahViewModel: SurahViewModel = hiltViewModel()
 ) {
     val allSurah by surahViewModel.allSurah.collectAsState(initial = emptyList())
-    val surahDetails = surahViewModel.state.value.surahDetails!!.result
 
     val colors = listOf(
         Color1,
@@ -56,9 +54,7 @@ fun SurahScreen(
                 brush = Brush.horizontalGradient(colors)
             )
     ) {
-        surahDetails.onEach {
-            Log.d("mlog", "SurahDetails: $it ")
-        }
+
 
         LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
             item {

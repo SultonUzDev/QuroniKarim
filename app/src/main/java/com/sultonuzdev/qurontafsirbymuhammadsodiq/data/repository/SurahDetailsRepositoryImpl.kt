@@ -4,12 +4,13 @@ import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.api.SurahDetailsApi
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah_details.SurahDetails
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.repository.SurahDetailsRepository
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.Resource
+import org.json.JSONObject
 import javax.inject.Inject
 
 class SurahDetailsRepositoryImpl @Inject constructor(
     private val api: SurahDetailsApi
 ) : SurahDetailsRepository {
-    override suspend fun getSurahDetailById(surahId: String): Resource<SurahDetails> {
+    override suspend fun getSurahDetailById(surahId: String): SurahDetails{
         return api.getSurahDetails(surahId)
     }
 }

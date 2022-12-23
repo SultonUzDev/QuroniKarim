@@ -1,8 +1,8 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -31,6 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.R
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah.Surah
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.navigation.ScreenRoute
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.*
 
 @Composable
@@ -67,7 +68,7 @@ fun SurahScreen(
                     color = Color.Gray,
                     modifier = Modifier.padding(2.dp)
                 )
-                SurahRow(surah = surah)
+                SurahRow(surah = surah, navHostController)
 
 
             }
@@ -116,10 +117,15 @@ fun HeaderPreview() {
 }
 
 @Composable
-fun SurahRow(surah: Surah) {
+fun SurahRow(surah: Surah, navHostController: NavHostController) {
 
 
-    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .clickable {
+                navHostController.navigate(ScreenRoute.SurahDetails.route)
+            }, verticalAlignment = Alignment.CenterVertically) {
         ImageTextView(surah.id.toString())
         SurahInfoScreen(surah = surah)
 

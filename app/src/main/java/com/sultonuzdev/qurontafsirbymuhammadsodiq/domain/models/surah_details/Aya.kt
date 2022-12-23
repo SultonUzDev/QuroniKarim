@@ -5,13 +5,15 @@ import com.google.gson.annotations.SerializedName
 data class Aya(
 
     @SerializedName("aya")
-    val aya: String? =null,
+    val aya: String,
+    @SerializedName("arabic_text")
+    val arabicText: String,
     @SerializedName("footnotes")
-    val footnotes: String? =null,
+    val footnotes: String,
     @SerializedName("id")
-    val id: String? =null,
+    val id: String,
     @SerializedName("sura")
-    val sura: String? =null,
+    val sura: String,
     @SerializedName("translation")
-    val translation: String? =null
+    val translation: String
 )

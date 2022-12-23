@@ -29,28 +29,12 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val surahViewModel: SurahViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        surahViewModel.getSurahDetailsById("1")
         setContent {
             QuronTafsirByMuhammadSodiqTheme {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    if (surahViewModel.state.isLoading) {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                    }
-                    surahViewModel.state.error?.let { error ->
-                        Text(
-                            text = error,
-                            color = Color.Red,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.align(
-                                Alignment.Center
-                            )
-                        )
-                    }
 
-                    Log.d("mlog", "SurahDetail: ${surahViewModel.state.surahDetails}")
                     SetUpNavGraph(navController = rememberNavController())
                 }
 
@@ -58,5 +42,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
 }
 

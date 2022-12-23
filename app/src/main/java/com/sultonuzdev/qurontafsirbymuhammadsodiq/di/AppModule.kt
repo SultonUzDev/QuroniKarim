@@ -39,13 +39,13 @@ object AppModule {
     fun provideRepository(database: SurahDatabase): SurahRepository =
         SurahRepositoryImpl(database.surahDao)
 //
-//    @Provides
-//    @Singleton
-//    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder().apply {
-//        val httpLoggingInterceptor = HttpLoggingInterceptor()
-//        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-//        addInterceptor(httpLoggingInterceptor)
-//    }.build()
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder().apply {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        addInterceptor(httpLoggingInterceptor)
+    }.build()
 
 
     @Provides

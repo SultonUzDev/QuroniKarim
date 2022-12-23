@@ -7,5 +7,5 @@ import org.json.JSONObject
 
 interface SurahDetailsRepository {
 
-    suspend fun getSurahDetailById(surahId: String): Resource<SurahDetails>
+        suspend fun getSurahDetailById(surahId: String): SurahDetails
 }

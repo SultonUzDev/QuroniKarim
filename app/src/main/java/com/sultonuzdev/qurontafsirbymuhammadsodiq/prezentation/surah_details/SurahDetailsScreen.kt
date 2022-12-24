@@ -1,5 +1,8 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah_details
 
+import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,12 +17,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah_details.Aya
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah.SurahDetailsState
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah.SurahViewModel
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.InternetConnection
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.isConnected
 
 @Composable
 fun SurahDetailsScreen(
-    viewModel: SurahDetailsViewModel = hiltViewModel()
+    viewModel: SurahViewModel = hiltViewModel()
 ) {
+    Log.d("mlog", "SurahDetails : is working")
+
     var ayaList = emptyList<Aya>()
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -42,7 +52,7 @@ fun SurahDetailsScreen(
             )
         }
         viewModel.state.surahDetails?.let {
-            ayaList =it.result
+            ayaList = it.result
         }
         LazyColumn {
             items(ayaList) { aya ->
@@ -50,8 +60,6 @@ fun SurahDetailsScreen(
 
             }
         }
-
-
 
 
     }

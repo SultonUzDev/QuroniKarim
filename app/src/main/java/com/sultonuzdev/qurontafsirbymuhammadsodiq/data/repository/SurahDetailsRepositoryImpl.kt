@@ -5,12 +5,13 @@ import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah_details.Su
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.repository.SurahDetailsRepository
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.Resource
 import org.json.JSONObject
+import retrofit2.Response
 import javax.inject.Inject
 
 class SurahDetailsRepositoryImpl @Inject constructor(
     private val api: SurahDetailsApi
 ) : SurahDetailsRepository {
-    override suspend fun getSurahDetailById(surahId: String): SurahDetails{
+    override suspend fun getSurahDetailById(surahId: String): Response<SurahDetails>{
         return api.getSurahDetails(surahId)
     }
 }

@@ -35,7 +35,10 @@ class MainActivity : ComponentActivity() {
             QuronTafsirByMuhammadSodiqTheme {
                 Box(modifier = Modifier.fillMaxSize()) {
 
-                    SetUpNavGraph(navController = rememberNavController())
+                    SetUpNavGraph(
+                        context = this@MainActivity,
+                        navController = rememberNavController()
+                    )
                 }
 
 

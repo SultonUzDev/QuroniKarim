@@ -16,9 +16,37 @@ import javax.inject.Inject
 class SurahViewModel
 @Inject constructor(
     private val surahRepository: SurahRepository,
+    private val surahDetailsRepository: SurahDetailsRepository
 ) : ViewModel() {
 
     val allSurah = surahRepository.getAllSurah()
 
+
+
+    var state by mutableStateOf(SurahDetailsState())
+
+//    init {
+//        getSurahDetailsById("1")
+//    }
+
+    fun getSurahDetailsById(id: String) {
+        viewModelScope.launch {
+
+            state = state.copy(surahDetails = null, isLoading = true, error = null)
+            val result = surahDetailsRepository.getSurahDetailById(id)
+            state = if (result.isSuccessful) {
+                state.copy(surahDetails = result.body(), isLoading = false, error = null)
+            } else {
+                state.copy(
+                    surahDetails = null,
+                    isLoading = false,
+                    error = result.errorBody().toString()
+                )
+
+            }
+
+        }
+
+    }
 
 }

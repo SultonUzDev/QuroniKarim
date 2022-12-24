@@ -1,5 +1,7 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,9 +35,11 @@ import com.sultonuzdev.qurontafsirbymuhammadsodiq.R
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah.Surah
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.navigation.ScreenRoute
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.*
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.InternetConnection
 
 @Composable
 fun SurahScreen(
+    context: Context,
     navHostController: NavHostController,
     surahViewModel: SurahViewModel = hiltViewModel()
 ) {
@@ -68,7 +72,7 @@ fun SurahScreen(
                     color = Color.Gray,
                     modifier = Modifier.padding(2.dp)
                 )
-                SurahRow(surah = surah, navHostController)
+                SurahRow(surah = surah, navHostController, context, surahViewModel)
 
 
             }
@@ -117,15 +121,33 @@ fun HeaderPreview() {
 }
 
 @Composable
-fun SurahRow(surah: Surah, navHostController: NavHostController) {
+fun SurahRow(
+    surah: Surah,
+    navHostController: NavHostController,
+    context: Context,
+    surahViewModel: SurahViewModel
+) {
 
 
     Row(
         Modifier
             .fillMaxWidth()
             .clickable {
-                navHostController.navigate(ScreenRoute.SurahDetails.route)
-            }, verticalAlignment = Alignment.CenterVertically) {
+
+                val internetConnection = InternetConnection.checkForInternet(context)
+
+                if (internetConnection) {
+                    surahViewModel.getSurahDetailsById(surah.id.toString())
+                    navHostController.navigate(ScreenRoute.SurahDetails.route)
+
+                } else {
+                    Toast
+                        .makeText(context, "Internetni tekshiring", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+            }, verticalAlignment = Alignment.CenterVertically
+    ) {
         ImageTextView(surah.id.toString())
         SurahInfoScreen(surah = surah)
 

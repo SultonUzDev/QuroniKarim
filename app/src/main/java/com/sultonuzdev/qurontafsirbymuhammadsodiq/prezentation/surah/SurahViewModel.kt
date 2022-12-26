@@ -29,24 +29,18 @@ class SurahViewModel
 //        getSurahDetailsById("1")
 //    }
 
-    fun getSurahDetailsById(id: String) {
-        viewModelScope.launch {
-
-            state = state.copy(surahDetails = null, isLoading = true, error = null)
-            val result = surahDetailsRepository.getSurahDetailById(id)
-            state = if (result.isSuccessful) {
-                state.copy(surahDetails = result.body(), isLoading = false, error = null)
-            } else {
-                state.copy(
-                    surahDetails = null,
-                    isLoading = false,
-                    error = result.errorBody().toString()
-                )
-
-            }
-
-        }
-
-    }
+//    fun getSurahDetailsById(id: String) {
+//        viewModelScope.launch {
+//
+//            state = state.copy(surahDetails = null, isLoading = true, error = null)
+//            val result = surahDetailsRepository.getSurahDetailById(id)
+//            state = state.copy(surahDetails = result, isLoading = false, error = null)
+//
+//
+//
+//
+//        }
+//
+//    }
 
 }

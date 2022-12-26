@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.repository.SurahDetailsRepository
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah.SurahDetailsState
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,31 +16,24 @@ import javax.inject.Inject
 class SurahDetailsViewModel @Inject constructor(
     private val surahDetailsRepository: SurahDetailsRepository
 ) : ViewModel() {
-//
-//    var state by mutableStateOf(SurahDetailsState())
-//
-////    init {
-////        getSurahDetailsById("1")
-////    }
-//
-//    fun getSurahDetailsById(id: String) {
-//        viewModelScope.launch {
-//
-//            state = state.copy(surahDetails = null, isLoading = true, error = null)
-//            val result = surahDetailsRepository.getSurahDetailById(id)
-//            state = if (result.isSuccessful) {
-//                state.copy(surahDetails = result.body(), isLoading = false, error = null)
-//            } else {
-//                state.copy(
-//                    surahDetails = null,
-//                    isLoading = false,
-//                    error = result.errorBody().toString()
-//                )
-//
-//            }
-//
-//        }
-//
-//    }
+
+    var state by mutableStateOf(SurahDetailsState())
+
+    fun getSurahDetailsById(id: String) {
+        viewModelScope.launch {
+            val result = surahDetailsRepository.getSurahDetailById(id)
+            state = state.copy(surahDetails = null, isLoading = true, error = result.message)
+            state = when (result) {
+                is Resource.Success -> {
+                    state.copy(surahDetails = result.data, isLoading = false, error = null)
+                }
+                is Resource.Error -> {
+                    state.copy(surahDetails = null, isLoading = false, error = result.message)
+                }
+            }
+
+        }
+
+    }
 
 }

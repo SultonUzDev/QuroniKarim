@@ -1,6 +1,7 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.navigation
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -27,18 +28,27 @@ fun SetUpNavGraph(context: Context, navController: NavHostController) {
 
         }
 
-        /*+ "/{surahId}",
-            arguments = listOf(navArgument("surahId") {
-                type =
-                    NavType.StringType
-            })*/
-        composable(ScreenRoute.SurahDetails.route
-        ) {
+        composable(
+            route = ScreenRoute.SurahDetails.route + "/surahId ={surahId}",
+            arguments = listOf(
+                navArgument(name = "surahId") {
+                    type = NavType.StringType
+                })
 
-//            val surahId = navBack.arguments?.getString("surahId")
-//            surahId?.let {
-                SurahDetailsScreen()
-//            }
+        ) { navBack ->
+
+            navBack.arguments?.let { bundle ->
+                Log.d("mlog", " Bundle: $bundle");
+
+                val surahId = bundle.getString("surahId")
+                surahId?.let { id ->
+                    SurahDetailsScreen(
+                        id,
+                    )
+                }
+
+            }
+
         }
     }
 

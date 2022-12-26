@@ -8,5 +8,5 @@ import retrofit2.Response
 
 interface SurahDetailsRepository {
 
-        suspend fun getSurahDetailById(surahId: String): Response<SurahDetails>
+        suspend fun getSurahDetailById(surahId: String): Resource<SurahDetails>
 }

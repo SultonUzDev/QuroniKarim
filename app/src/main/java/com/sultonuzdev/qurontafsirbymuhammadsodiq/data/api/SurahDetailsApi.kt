@@ -12,5 +12,5 @@ import retrofit2.http.Query
 
 interface SurahDetailsApi {
     @GET("{id}")
-    suspend fun getSurahDetails(@Path("id") surahId: String):Response<SurahDetails>
+    suspend fun getSurahDetails(@Path("id") surahId: String):SurahDetails
 }

@@ -72,7 +72,7 @@ fun SurahScreen(
                     color = Color.Gray,
                     modifier = Modifier.padding(2.dp)
                 )
-                SurahRow(surah = surah, navHostController, context, surahViewModel)
+                SurahRow(surah = surah, navHostController, context)
 
 
             }
@@ -125,7 +125,6 @@ fun SurahRow(
     surah: Surah,
     navHostController: NavHostController,
     context: Context,
-    surahViewModel: SurahViewModel
 ) {
 
 
@@ -137,8 +136,10 @@ fun SurahRow(
                 val internetConnection = InternetConnection.checkForInternet(context)
 
                 if (internetConnection) {
-                    surahViewModel.getSurahDetailsById(surah.id.toString())
-                    navHostController.navigate(ScreenRoute.SurahDetails.route)
+                    navHostController.navigate(
+                        ScreenRoute.SurahDetails.route
+                                + "/surahId="
+                    )
 
                 } else {
                     Toast

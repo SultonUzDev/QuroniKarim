@@ -11,7 +11,13 @@ import javax.inject.Inject
 class SurahDetailsRepositoryImpl @Inject constructor(
     private val api: SurahDetailsApi
 ) : SurahDetailsRepository {
-    override suspend fun getSurahDetailById(surahId: String): Response<SurahDetails>{
-        return api.getSurahDetails(surahId)
+    override suspend fun getSurahDetailById(surahId: String): Resource<SurahDetails> {
+
+        return try {
+            Resource.Success(data = api.getSurahDetails(surahId))
+        } catch (e: Exception) {
+            Resource.Error(data = null, message = e.message)
+        }
+
     }
 }

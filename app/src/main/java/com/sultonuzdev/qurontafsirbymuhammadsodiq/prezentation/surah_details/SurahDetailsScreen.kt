@@ -1,8 +1,6 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah_details
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,11 +23,17 @@ import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.isConnected
 
 @Composable
 fun SurahDetailsScreen(
-    viewModel: SurahViewModel = hiltViewModel()
+    surahId: String,
+    viewModel: SurahDetailsViewModel = hiltViewModel()
 ) {
-    Log.d("mlog", "SurahDetails : is working")
 
     var ayaList = emptyList<Aya>()
+    viewModel.getSurahDetailsById(surahId)
+
+//    LaunchedEffect(key1 = !viewModel.state.isLoading) {
+//        Log.d("mlog", "SurahDetails $surahId : is working")
+//
+//    }
 
     Box(
         modifier = Modifier

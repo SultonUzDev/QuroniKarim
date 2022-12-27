@@ -29,22 +29,28 @@ fun SetUpNavGraph(context: Context, navController: NavHostController) {
         }
 
         composable(
-            route = ScreenRoute.SurahDetails.route + "/surahId ={surahId}",
+            route = ScreenRoute.SurahDetails.route + "/{surahId}/{surahName}",
             arguments = listOf(
                 navArgument(name = "surahId") {
                     type = NavType.StringType
-                })
+                },
+                navArgument(name = "surahName") {
+                    type = NavType.StringType
+                }
+            )
 
         ) { navBack ->
 
             navBack.arguments?.let { bundle ->
-                Log.d("mlog", " Bundle: $bundle");
-
                 val surahId = bundle.getString("surahId")
+                val surahName = bundle.getString("surahName")
                 surahId?.let { id ->
-                    SurahDetailsScreen(
-                        id,
-                    )
+                    surahName?.let {
+                        SurahDetailsScreen(
+                            it,
+                            id,
+                        )
+                    }
                 }
 
             }

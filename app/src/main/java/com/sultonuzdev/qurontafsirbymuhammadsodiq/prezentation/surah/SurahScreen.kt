@@ -138,7 +138,13 @@ fun SurahRow(
                 if (internetConnection) {
                     navHostController.navigate(
                         ScreenRoute.SurahDetails.route
-                                + "/surahId="
+                                + "/{surahId}".replace(
+                            oldValue = "{surahId}",
+                            newValue = surah.id.toString()
+                        ) + "/{surahName}".replace(
+                            oldValue = "{surahName}",
+                            newValue = surah.surahName
+                        )
                     )
 
                 } else {

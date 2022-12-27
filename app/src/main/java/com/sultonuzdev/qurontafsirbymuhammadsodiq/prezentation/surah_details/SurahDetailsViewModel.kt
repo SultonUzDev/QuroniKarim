@@ -22,7 +22,7 @@ class SurahDetailsViewModel @Inject constructor(
     fun getSurahDetailsById(id: String) {
         viewModelScope.launch {
             val result = surahDetailsRepository.getSurahDetailById(id)
-            state = state.copy(surahDetails = null, isLoading = true, error = result.message)
+            state = state.copy(surahDetails = null, isLoading = true, error = null)
             state = when (result) {
                 is Resource.Success -> {
                     state.copy(surahDetails = result.data, isLoading = false, error = null)

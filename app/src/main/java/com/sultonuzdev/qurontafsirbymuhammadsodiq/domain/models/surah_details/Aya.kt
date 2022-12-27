@@ -9,7 +9,7 @@ data class Aya(
     @SerializedName("arabic_text")
     val arabicText: String,
     @SerializedName("footnotes")
-    val footnotes: String,
+    val footnotes: String? = "",
     @SerializedName("id")
     val id: String,
     @SerializedName("sura")

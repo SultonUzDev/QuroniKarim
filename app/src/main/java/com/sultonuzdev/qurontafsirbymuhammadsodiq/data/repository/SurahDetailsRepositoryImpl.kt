@@ -1,6 +1,9 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.data.repository
 
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.api.SurahDetailsApi
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.db.SurahDao
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah.AyaWithDetails
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah_details.Aya
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah_details.SurahDetails
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.repository.SurahDetailsRepository
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.Resource
@@ -9,7 +12,8 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class SurahDetailsRepositoryImpl @Inject constructor(
-    private val api: SurahDetailsApi
+    private val api: SurahDetailsApi,
+    private val surahDao: SurahDao
 ) : SurahDetailsRepository {
     override suspend fun getSurahDetailById(surahId: String): Resource<SurahDetails> {
 
@@ -19,5 +23,9 @@ class SurahDetailsRepositoryImpl @Inject constructor(
             Resource.Error(data = null, message = e.message)
         }
 
+    }
+
+    override suspend fun saveAyaInDb(aya: AyaWithDetails) {
+        surahDao.insertSurahIntoDb(aya)
     }
 }

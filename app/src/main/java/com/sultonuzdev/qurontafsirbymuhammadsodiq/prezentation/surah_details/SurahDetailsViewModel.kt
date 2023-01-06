@@ -5,8 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah.AyaWithDetails
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah_details.Aya
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.repository.SurahDetailsRepository
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah.SurahDetailsState
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -36,4 +37,9 @@ class SurahDetailsViewModel @Inject constructor(
 
     }
 
+    fun saveAya(aya: AyaWithDetails) {
+        viewModelScope.launch {
+            surahDetailsRepository.saveAyaInDb(aya)
+        }
+    }
 }

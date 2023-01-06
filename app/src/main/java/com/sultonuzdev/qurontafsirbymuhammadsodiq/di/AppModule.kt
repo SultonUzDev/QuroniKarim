@@ -38,7 +38,8 @@ object AppModule {
     @Singleton
     fun provideRepository(database: SurahDatabase): SurahRepository =
         SurahRepositoryImpl(database.surahDao)
-//
+
+    //
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder().apply {
@@ -56,6 +57,7 @@ object AppModule {
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
     @Provides
     @Singleton
     fun provideSurahInfoApi(retrofit: Retrofit): SurahDetailsApi =
@@ -63,9 +65,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideSurahDetailsRepository(api: SurahDetailsApi): SurahDetailsRepository =
-        SurahDetailsRepositoryImpl(api)
-
+    fun provideSurahDetailsRepository(
+        api: SurahDetailsApi,
+        database: SurahDatabase
+    ): SurahDetailsRepository =
+        SurahDetailsRepositoryImpl(api, database.surahDao)
 
 
 }

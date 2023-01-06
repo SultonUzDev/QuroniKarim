@@ -27,26 +27,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.R
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.mapper.mapToAyaDetails
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah_details.Aya
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.*
 
 @Composable
 fun SurahDetailsScreen(
-    surahName: String,
-    surahId: String,
-    viewModel: SurahDetailsViewModel = hiltViewModel()
+    surahName: String, surahId: String, viewModel: SurahDetailsViewModel = hiltViewModel()
 ) {
     val colors = listOf(
-        Color3,
-        Color1,
-        Color2,
-        Color4
+        Color3, Color1, Color2, Color4
 
 
-        )
+    )
     var ayaList = emptyList<Aya>()
     val isLoading = viewModel.state.isLoading
-    LaunchedEffect(key1 = isLoading) {
+    LaunchedEffect(key1 = !isLoading) {
         Log.d("mlog", " is effect $isLoading}");
         viewModel.getSurahDetailsById(surahId)
     }
@@ -60,9 +56,8 @@ fun SurahDetailsScreen(
             .background(
                 brush = Brush.linearGradient(colors)
             )
-    )
-    {
-
+    ) {
+        viewModel.getSurahDetailsById(surahId)
         if (isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier
@@ -85,6 +80,7 @@ fun SurahDetailsScreen(
         }
         viewModel.state.surahDetails?.let {
             ayaList = it.result
+            saveAyaListInDb(ayaList, viewModel)
         }
 
 
@@ -104,6 +100,12 @@ fun SurahDetailsScreen(
 
     }
 
+}
+
+fun saveAyaListInDb(ayaList: List<Aya>, viewModel: SurahDetailsViewModel) {
+    ayaList.forEach { aya ->
+        viewModel.saveAya(aya.mapToAyaDetails())
+    }
 }
 
 
@@ -126,8 +128,7 @@ fun HeaderScreen(name: String) {
             )
         Text(
             text = name,
-            modifier = Modifier
-                .align(Alignment.Center),
+            modifier = Modifier.align(Alignment.Center),
             fontFamily = FontFamily(Font(R.font.kamikom)),
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.SemiBold,
@@ -155,7 +156,8 @@ fun SurahDetailsItemRow(aya: Aya) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
-            fontFamily = FontFamily(Font(R.font.kamikom)), color = ColorAya
+            fontFamily = FontFamily(Font(R.font.kamikom)),
+            color = ColorAya
         )
 
 
@@ -164,8 +166,7 @@ fun SurahDetailsItemRow(aya: Aya) {
                 text = buildAnnotatedString {
                     withStyle(
                         style = SpanStyle(
-                            color = Color.Blue,
-                            fontWeight = FontWeight.SemiBold
+                            color = Color.Blue, fontWeight = FontWeight.SemiBold
                         )
                     ) {
                         append("Изоҳ: ")
@@ -215,15 +216,15 @@ fun ImageTextViewForDetailsRow(id: String) {
         Image(
             painter = painterResource(id = R.drawable.ocatagon_surah_details),
             contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             alignment = Alignment.Center
         )
         Text(
             text = id,
-            modifier = Modifier
-                .align(Alignment.Center), textAlign = TextAlign.Center,
-            color = ColorTextHeader, fontFamily = FontFamily(Font(R.font.junegull),),
+            modifier = Modifier.align(Alignment.Center),
+            textAlign = TextAlign.Center,
+            color = ColorTextHeader,
+            fontFamily = FontFamily(Font(R.font.junegull)),
             fontSize = 12.sp
 
         )

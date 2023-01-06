@@ -1,4 +1,4 @@
-package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah
+package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah_details
 
 import com.google.gson.JsonObject
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah_details.SurahDetails

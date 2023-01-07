@@ -3,12 +3,13 @@ package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah_details
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -124,8 +125,17 @@ fun SurahDetailsItemRow(aya: Ayat) {
             .fillMaxWidth()
             .padding(horizontal = 4.dp)
     ) {
-
+        Icon(
+            Icons.Default.PlayArrow,
+            contentDescription = null,
+            modifier = Modifier
+                .align(Alignment.End)
+                .clickable {
+                    playAya(aya.id)
+                }
+        )
         MainRowInItemView(aya = aya)
+
         Text(
             text = aya.translation,
             textAlign = TextAlign.Start,
@@ -167,6 +177,7 @@ fun MainRowInItemView(aya: Ayat) {
     Row(Modifier.fillMaxWidth()) {
         val id = aya.sura + "/" + aya.aya
         ImageTextViewForDetailsRow(id = id)
+
         Text(
             text = aya.arabicText,
             textAlign = TextAlign.End,
@@ -180,7 +191,12 @@ fun MainRowInItemView(aya: Ayat) {
 
         )
 
+
     }
+}
+
+fun playAya(id: String) {
+
 }
 
 @Composable

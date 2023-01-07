@@ -27,27 +27,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.R
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.mapper.mapToAyaDetails
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah_details.Aya
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah.Ayat
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah.SurahViewModel
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.*
 
 @Composable
 fun SurahDetailsScreen(
-    surahName: String, surahId: String, viewModel: SurahDetailsViewModel = hiltViewModel()
+    surahName: String, surahId: String, viewModel: SurahViewModel = hiltViewModel()
 ) {
     val colors = listOf(
         Color3, Color1, Color2, Color4
 
 
     )
-    var ayaList = emptyList<Aya>()
-    val isLoading = viewModel.state.isLoading
-    LaunchedEffect(key1 = !isLoading) {
-        Log.d("mlog", " is effect $isLoading}");
-        viewModel.getSurahDetailsById(surahId)
-    }
-
-
+    var ayaList = emptyList<Ayat>()
+    viewModel.getSurahDetailsById(surahId.toInt())
 
 
     Box(
@@ -57,18 +51,8 @@ fun SurahDetailsScreen(
                 brush = Brush.linearGradient(colors)
             )
     ) {
-        viewModel.getSurahDetailsById(surahId)
-        if (isLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .background(color = Color.Blue)
-            )
-        }
 
-
-
-        viewModel.state.error?.let { error ->
+        viewModel.state.value.error?.let { error ->
             Text(
                 text = error,
                 color = Color.Red,
@@ -78,9 +62,8 @@ fun SurahDetailsScreen(
                 )
             )
         }
-        viewModel.state.surahDetails?.let {
-            ayaList = it.result
-            saveAyaListInDb(ayaList, viewModel)
+        viewModel.state.value.ayaList?.let {
+            ayaList = it
         }
 
 
@@ -100,12 +83,6 @@ fun SurahDetailsScreen(
 
     }
 
-}
-
-fun saveAyaListInDb(ayaList: List<Aya>, viewModel: SurahDetailsViewModel) {
-    ayaList.forEach { aya ->
-        viewModel.saveAya(aya.mapToAyaDetails())
-    }
 }
 
 
@@ -141,7 +118,7 @@ fun HeaderScreen(name: String) {
 }
 
 @Composable
-fun SurahDetailsItemRow(aya: Aya) {
+fun SurahDetailsItemRow(aya: Ayat) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -186,7 +163,7 @@ fun SurahDetailsItemRow(aya: Aya) {
 }
 
 @Composable
-fun MainRowInItemView(aya: Aya) {
+fun MainRowInItemView(aya: Ayat) {
     Row(Modifier.fillMaxWidth()) {
         val id = aya.sura + "/" + aya.aya
         ImageTextViewForDetailsRow(id = id)

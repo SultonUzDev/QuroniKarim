@@ -2,11 +2,8 @@ package com.sultonuzdev.qurontafsirbymuhammadsodiq.di
 
 import android.content.Context
 import androidx.room.Room
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.api.SurahDetailsApi
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.db.SurahDatabase
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.repository.SurahDetailsRepositoryImpl
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.repository.SurahRepositoryImpl
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.repository.SurahDetailsRepository
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.repository.SurahRepository
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.Constants
 import dagger.Module
@@ -28,8 +25,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideSurahDatabase(@ApplicationContext context: Context): SurahDatabase =
-        Room.databaseBuilder(context, SurahDatabase::class.java, "quran.db")
-            .createFromAsset("quran.db")
+        Room.databaseBuilder(context, SurahDatabase::class.java, "quran_db.db")
+            .createFromAsset("quran_db.db")
             .allowMainThreadQueries()
             .build()
 
@@ -58,18 +55,18 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    @Provides
-    @Singleton
-    fun provideSurahInfoApi(retrofit: Retrofit): SurahDetailsApi =
-        retrofit.create(SurahDetailsApi::class.java)
-
-    @Provides
-    @Singleton
-    fun provideSurahDetailsRepository(
-        api: SurahDetailsApi,
-        database: SurahDatabase
-    ): SurahDetailsRepository =
-        SurahDetailsRepositoryImpl(api, database.surahDao)
-
+//    @Provides
+//    @Singleton
+//    fun provideSurahInfoApi(retrofit: Retrofit): SurahDetailsApi =
+//        retrofit.create(SurahDetailsApi::class.java)
+//
+//    @Provides
+//    @Singleton
+//    fun provideSurahDetailsRepository(
+//        api: SurahDetailsApi,
+//        database: SurahDatabase
+//    ): SurahDetailsRepository =
+//        SurahDetailsRepositoryImpl(api, database.surahDao)
+//
 
 }

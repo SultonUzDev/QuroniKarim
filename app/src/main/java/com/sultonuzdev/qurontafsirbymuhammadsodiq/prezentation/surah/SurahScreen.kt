@@ -133,9 +133,7 @@ fun SurahRow(
             .fillMaxWidth()
             .clickable {
 
-                val internetConnection = InternetConnection.checkForInternet(context)
 
-                if (internetConnection) {
                     navHostController.navigate(
                         ScreenRoute.SurahDetails.route
                                 + "/{surahId}".replace(
@@ -147,11 +145,6 @@ fun SurahRow(
                         )
                     )
 
-                } else {
-                    Toast
-                        .makeText(context, "Internetni tekshiring", Toast.LENGTH_SHORT)
-                        .show()
-                }
 
             }, verticalAlignment = Alignment.CenterVertically
     ) {

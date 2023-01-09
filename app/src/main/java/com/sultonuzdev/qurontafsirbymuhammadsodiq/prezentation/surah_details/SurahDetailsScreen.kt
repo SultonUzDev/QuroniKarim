@@ -2,6 +2,7 @@ package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah_details
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,9 +10,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +33,7 @@ import com.sultonuzdev.qurontafsirbymuhammadsodiq.R
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah.Ayat
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah.SurahViewModel
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.*
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.InternetConnection
 
 @Composable
 fun SurahDetailsScreen(
@@ -148,8 +147,13 @@ fun SurahDetailsItemRow(aya: Ayat) {
         }
 
 
-        val iconPlay = Icons.Default.PlayArrow
-        val iconPause = Icons.Default.Person
+        val iconPlay = painterResource(id = R.drawable.ic_play)
+
+        val iconPause = painterResource(id = R.drawable.ic_pause)
+
+
+
+
         player.playWhenReady = true
         Icon(
             if (checkPlayStatus) iconPause else iconPlay,
@@ -157,15 +161,26 @@ fun SurahDetailsItemRow(aya: Ayat) {
             modifier = Modifier
                 .align(Alignment.End)
                 .clickable {
-                    if (checkPlayStatus){
-                        player.pause()
-                        Log.d("mlog", " pause");
-                        player.play()
-                    }else {
-                        Log.d("mlog", " play");
-                        player.play()
+                    val internetConnection = InternetConnection.checkForInternet(context)
+
+                    if (internetConnection) {
+                        if (checkPlayStatus) {
+                            player.pause()
+                            Log.d("mlog", " pause");
+                        } else {
+                            Log.d("mlog", " play");
+                            player.play()
+
+                        }
+                        checkPlayStatus = !checkPlayStatus
+                    } else {
+                        Toast
+                            .makeText(context, "Internetni tekshiring", Toast.LENGTH_SHORT)
+                            .show()
                     }
-                    checkPlayStatus = !checkPlayStatus
+
+
+
 
                 }
         )

@@ -1,5 +1,6 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah_details
 
+import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -9,13 +10,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -27,6 +29,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.R
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah.Ayat
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah.SurahViewModel
@@ -34,7 +38,9 @@ import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.*
 
 @Composable
 fun SurahDetailsScreen(
-    surahName: String, surahId: String, viewModel: SurahViewModel = hiltViewModel()
+    surahName: String,
+    surahId: String,
+    viewModel: SurahViewModel = hiltViewModel(),
 ) {
     val colors = listOf(
         Color3, Color1, Color2, Color4
@@ -43,6 +49,7 @@ fun SurahDetailsScreen(
     )
     var ayaList = emptyList<Ayat>()
     viewModel.getSurahDetailsById(surahId.toInt())
+
 
 
     Box(
@@ -120,18 +127,46 @@ fun HeaderScreen(name: String) {
 
 @Composable
 fun SurahDetailsItemRow(aya: Ayat) {
+
+    val context = LocalContext.current
+    val mediaItem =
+        MediaItem.fromUri("https://cdn.islamic.network/quran/audio/128/ar.alafasy/${aya.aya}.mp3")
+    val player = provideExoPlayer(context = context, mediaItem = mediaItem)
+
+    LaunchedEffect(player) {
+        player.prepare()
+        player.playWhenReady = false
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 4.dp)
     ) {
+
+        var checkPlayStatus by remember {
+            mutableStateOf(false)
+        }
+
+
+        val iconPlay = Icons.Default.PlayArrow
+        val iconPause = Icons.Default.Person
+        player.playWhenReady = true
         Icon(
-            Icons.Default.PlayArrow,
+            if (checkPlayStatus) iconPause else iconPlay,
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.End)
                 .clickable {
-                    playAya(aya.id)
+                    if (checkPlayStatus){
+                        player.pause()
+                        Log.d("mlog", " pause");
+                        player.play()
+                    }else {
+                        Log.d("mlog", " play");
+                        player.play()
+                    }
+                    checkPlayStatus = !checkPlayStatus
+
                 }
         )
         MainRowInItemView(aya = aya)
@@ -195,7 +230,20 @@ fun MainRowInItemView(aya: Ayat) {
     }
 }
 
-fun playAya(id: String) {
+fun provideExoPlayer(context: Context, mediaItem: MediaItem): ExoPlayer {
+    val player = ExoPlayer.Builder(context).build()
+    player.setMediaItem(mediaItem)
+    return player
+}
+
+fun playAya(
+    id: String, context: Context
+
+) {
+
+    val mediaItem = MediaItem.fromUri("http://kastos.cdnstream.com/1345_32")
+    val player = provideExoPlayer(context = context, mediaItem = mediaItem)
+
 
 }
 

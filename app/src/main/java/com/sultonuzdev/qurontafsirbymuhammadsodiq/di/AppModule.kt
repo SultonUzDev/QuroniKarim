@@ -3,6 +3,7 @@ package com.sultonuzdev.qurontafsirbymuhammadsodiq.di
 import android.content.Context
 import androidx.room.Room
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.db.SurahDatabase
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.prefrences.DataStoreRepository
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.data.repository.SurahRepositoryImpl
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.repository.SurahRepository
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.Constants
@@ -55,18 +56,12 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-//    @Provides
-//    @Singleton
-//    fun provideSurahInfoApi(retrofit: Retrofit): SurahDetailsApi =
-//        retrofit.create(SurahDetailsApi::class.java)
-//
-//    @Provides
-//    @Singleton
-//    fun provideSurahDetailsRepository(
-//        api: SurahDetailsApi,
-//        database: SurahDatabase
-//    ): SurahDetailsRepository =
-//        SurahDetailsRepositoryImpl(api, database.surahDao)
-//
+
+    @Provides
+    @Singleton
+    fun provideDataStoreRepository(
+        @ApplicationContext context: Context
+    ) = DataStoreRepository(context = context)
+
 
 }

@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -39,10 +40,11 @@ import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.InternetConnection
 
 @Composable
 fun SurahScreen(
-    context: Context,
     navHostController: NavHostController,
     surahViewModel: SurahViewModel = hiltViewModel()
 ) {
+    val context: Context = LocalContext.current
+
     val allSurah by surahViewModel.allSurah.collectAsState(initial = emptyList())
 
     val colors = listOf(
@@ -133,17 +135,16 @@ fun SurahRow(
             .fillMaxWidth()
             .clickable {
 
-
-                    navHostController.navigate(
-                        ScreenRoute.SurahDetails.route
-                                + "/{surahId}".replace(
-                            oldValue = "{surahId}",
-                            newValue = surah.id.toString()
-                        ) + "/{surahName}".replace(
-                            oldValue = "{surahName}",
-                            newValue = surah.surahName
-                        )
+                navHostController.navigate(
+                    ScreenRoute.SurahDetails.route
+                            + "/{surahId}".replace(
+                        oldValue = "{surahId}",
+                        newValue = surah.id.toString()
+                    ) + "/{surahName}".replace(
+                        oldValue = "{surahName}",
+                        newValue = surah.surahName
                     )
+                )
 
 
             }, verticalAlignment = Alignment.CenterVertically

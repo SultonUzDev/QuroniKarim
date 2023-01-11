@@ -29,11 +29,15 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.R
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah.Ayat
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah.SurahViewModel
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.*
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.InternetConnection
+
+var isPlaying = false
+//var ayaId = 1
 
 @Composable
 fun SurahDetailsScreen(
@@ -129,8 +133,12 @@ fun SurahDetailsItemRow(aya: Ayat) {
 
     val context = LocalContext.current
     val mediaItem =
-        MediaItem.fromUri("https://cdn.islamic.network/quran/audio/128/ar.alafasy/${aya.aya}.mp3")
+        MediaItem.fromUri("https://cdn.islamic.network/quran/audio/128/ar.alafasy/${aya.id}.mp3")
     val player = provideExoPlayer(context = context, mediaItem = mediaItem)
+
+//    ayaId = aya.id.toInt()
+
+
 
     LaunchedEffect(player) {
         player.prepare()
@@ -154,25 +162,45 @@ fun SurahDetailsItemRow(aya: Ayat) {
 
 
 
+
         player.playWhenReady = true
-        Icon(
-            if (checkPlayStatus) iconPause else iconPlay,
+        player.addListener(object : Player.Listener {
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                if (playbackState == ExoPlayer.STATE_ENDED) {
+                    checkPlayStatus = !checkPlayStatus
+                    isPlaying = false
+                }
+            }
+        })
+        Icon(if (checkPlayStatus) iconPause else iconPlay,
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.End)
                 .clickable {
                     val internetConnection = InternetConnection.checkForInternet(context)
 
-                    if (internetConnection) {
-                        if (checkPlayStatus) {
-                            player.pause()
-                            Log.d("mlog", " pause");
-                        } else {
-                            Log.d("mlog", " play");
-                            player.play()
 
+                    if (internetConnection) {
+                        if (isPlaying) {
+                            Toast
+                                .makeText(
+                                    context,
+                                    "Iltimos oyat yakunlangucha kuting",
+                                    Toast.LENGTH_SHORT
+                                )
+                                .show()
+                        } else {
+                            isPlaying = if (checkPlayStatus) {
+                                player.pause()
+                                false
+                            } else {
+                                player.play()
+                                true
+                            }
+                            checkPlayStatus = !checkPlayStatus
                         }
-                        checkPlayStatus = !checkPlayStatus
+
+
                     } else {
                         Toast
                             .makeText(context, "Internetni tekshiring", Toast.LENGTH_SHORT)
@@ -180,10 +208,7 @@ fun SurahDetailsItemRow(aya: Ayat) {
                     }
 
 
-
-
-                }
-        )
+                })
         MainRowInItemView(aya = aya)
 
         Text(

@@ -89,10 +89,15 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10'
 
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
-
+// DataStore Preferences
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
 
     implementation 'com.google.android.exoplayer:exoplayer:2.16.1'
+
+
+    implementation "com.google.accompanist:accompanist-pager:0.24.2-alpha"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.24.2-alpha"
 }
 
 kapt {

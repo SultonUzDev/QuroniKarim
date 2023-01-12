@@ -51,8 +51,6 @@ fun SurahScreen(
         Color1,
         Color2,
         Color3,
-
-
         )
     Column(
         Modifier

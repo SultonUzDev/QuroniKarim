@@ -5,30 +5,31 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.R
 
-@SuppressLint("SupportAnnotationUsage")
 sealed class IntroductionPages(
     @DrawableRes
     val image: Int,
     @StringRes
-    val title: String,
+    val title: Int,
     @StringRes
-    val desc: String
+    val desc: Int
 ) {
     object First : IntroductionPages(
-        image = R.drawable.logo,
-        title = "Bir",
-        desc = "Bir decs"
+        image = R.drawable.ic_first,
+        title = R.string.first,
+        desc = R.string.first_desc
     )
 
     object Second : IntroductionPages(
-        image = R.drawable.logo,
-        title = "IKKI",
-        desc = "IKKI IKKI"
+        image = R.drawable.ic_second,
+        title = R.string.second,
+        desc = R.string.second_desc
     )
 
     object Third : IntroductionPages(
-        image = R.drawable.logo,
-        title = "UCH",
-        desc = "Bir ikki uch"
+        image = R.drawable.ic_third,
+        title = R.string.third,
+        desc = R.string.third_desc
     )
+
+
 }

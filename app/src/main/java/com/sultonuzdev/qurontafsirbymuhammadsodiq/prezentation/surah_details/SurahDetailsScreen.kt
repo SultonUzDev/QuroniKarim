@@ -185,7 +185,7 @@ fun SurahDetailsItemRow(aya: Ayat) {
                             Toast
                                 .makeText(
                                     context,
-                                    "Iltimos oyat yakunlangucha kuting",
+                                    "Илтимос оят якунлангуча кутинг",
                                     Toast.LENGTH_SHORT
                                 )
                                 .show()
@@ -203,7 +203,7 @@ fun SurahDetailsItemRow(aya: Ayat) {
 
                     } else {
                         Toast
-                            .makeText(context, "Internetni tekshiring", Toast.LENGTH_SHORT)
+                            .makeText(context, "Илтимос интернетга уланишни текширинг", Toast.LENGTH_SHORT)
                             .show()
                     }
 
@@ -276,16 +276,6 @@ fun provideExoPlayer(context: Context, mediaItem: MediaItem): ExoPlayer {
     return player
 }
 
-fun playAya(
-    id: String, context: Context
-
-) {
-
-    val mediaItem = MediaItem.fromUri("http://kastos.cdnstream.com/1345_32")
-    val player = provideExoPlayer(context = context, mediaItem = mediaItem)
-
-
-}
 
 @Composable
 fun ImageTextViewForDetailsRow(id: String) {

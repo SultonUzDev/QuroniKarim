@@ -1,6 +1,17 @@
 <resources>
-    <string name="app_name">Қуръони  Карим</string>
+    <string name="app_name">Қурони Карим</string>
     <string name="app_description">Қуръони Карим \nШайх Муҳаммад Содиқ Муҳаммад Юсуф таржимаси</string>
     <string name="suralar">Суралар</string>
     <string name="count_desc"> та оят</string>
+
+    <string name="first">ШАЙХ МУҲАММАД СОДИҚ МУҲАММАД ЮСУФ</string>
+    <string name="first_desc">Дастурда <b>ШАЙХ МУҲАММАД СОДИҚ МУҲАММАД ЮСУФ </b>нинг <a href=" https://quranenc.com">quranenc.com</a> да келтирилган тафсиридан фойдаланилган</string>
+
+    <string name="second">МИШАРЙ РАШИД АЛАФАСЙ</string>
+    <string name="second_desc">Дастурда <b>МИШАРЙ РАШИД АЛАФАСЙ</b>нинг  <a href=" https://cdn.islamic.network">cdn.islamic.network</a> да келтирилган аудиолардан фойдаланилган </string>
+
+    <string name="third">СУЛТОН ҒАФУРОВ</string>
+    <string name="third_desc">Дастур СУЛТОН ҒАФУРОВ томонидан Android Jetpack Composeдан фойдаланиб яратилди</string>
+    <string name="next">Кейингиси</string>
+
 </resources>

@@ -1,7 +1,6 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.data.prefrences
 
 import android.content.Context
-import androidx.compose.runtime.produceState
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey

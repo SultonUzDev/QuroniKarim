@@ -1,7 +1,6 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah
 
 import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,11 +31,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.R
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.domain.models.surah.Surah
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.navigation.ScreenRoute
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.*
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.utils.InternetConnection
+import com.sultonuzdev.qurontafsirbymuhammadsodiq.R
 
 @Composable
 fun SurahScreen(

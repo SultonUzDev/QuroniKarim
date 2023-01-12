@@ -10,7 +10,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,8 +22,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.R
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.navigation.ScreenRoute
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.Color1
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.ColorPrimaryDark
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.ui.theme.ColorTextHeader
 import kotlinx.coroutines.delay
 

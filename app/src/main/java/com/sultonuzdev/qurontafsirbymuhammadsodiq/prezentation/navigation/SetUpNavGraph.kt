@@ -1,6 +1,5 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.navigation
 
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -8,7 +7,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.introduction.IntroductionScreen
-import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.splash.AnimatedSplashScreen
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah.SurahScreen
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.surah_details.SurahDetailsScreen
 

@@ -1,6 +1,5 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.introduction
 
-import android.annotation.SuppressLint
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.sultonuzdev.qurontafsirbymuhammadsodiq.R

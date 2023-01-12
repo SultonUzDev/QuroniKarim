@@ -9,4 +9,5 @@
 <img src="/img/img3.png" width="30%">
 <img src="/img/img4.png" width="30%">
 <img src="/img/img5.png" width="30%">
+<img src="/img/ic_logo.png" width="30%">
 </div>

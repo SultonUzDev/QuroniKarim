@@ -18,10 +18,6 @@ fun SetUpNavGraph( navController: NavHostController, startDestination: String) {
         composable(ScreenRoute.Introduction.route) {
             IntroductionScreen(navController)
         }
-
-//        composable(ScreenRoute.Splash.route) {
-//            AnimatedSplashScreen(navController = navController)
-//        }
         composable(
             ScreenRoute.Surah.route
         ) {

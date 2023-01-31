@@ -1,5 +1,6 @@
 package com.sultonuzdev.qurontafsirbymuhammadsodiq.prezentation.splash
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -23,7 +24,9 @@ class SplashViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             repository.readStateOfIntroduction().collect { completed ->
+                Log.d("mlog", "Completed: $completed")
                 if (completed) {
+
                     _startDestination.value = ScreenRoute.Surah.route
                 } else {
                     _startDestination.value = ScreenRoute.Introduction.route

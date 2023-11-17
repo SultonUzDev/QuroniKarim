@@ -133,7 +133,7 @@ fun FinishButton(
         horizontalArrangement = Arrangement.Center
     ) {
         AnimatedVisibility(
-            modifier = Modifier.fillMaxWidth().height(45.dp),
+            modifier = Modifier.fillMaxWidth().height(45.   dp),
             visible = pagerState.currentPage == 2
         ) {
             Button(

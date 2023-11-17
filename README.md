@@ -2,7 +2,7 @@
 
 - This is my Jetpack Compose app for portfolio
 
--Note that, app does not contain quran_db file
+- Note that, app does not contain quran_db file
 
 <div style="display:flex;">
 <img src="/img/feature_image.png" width="100%">
